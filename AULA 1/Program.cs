@@ -1,6 +1,11 @@
+using WebApplication1.Helpers;
+using WebApplication1.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Registrando o repositório como serviço
+builder.Services.AddScoped<TarefaRepositorio>(provider =>
+ new TarefaRepositorio(ConfigurationHelper.GetAppSetting<string>("ConnectionStrings:DefaultConnection")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
